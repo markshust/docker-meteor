@@ -1,0 +1,53 @@
+#!/bin/bash
+## Author: Mark Shust <mark@shust.com>
+## Version: 1.0.0
+## Repo: https://github.com/markoshust/docker-meteor
+## Description: Automatically build & deploy Meteor 1.3 apps with Docker (and Kubernetes).
+
+TARGET=$1
+VERSION=$2
+BASE_APP_NAME=barbaz
+BUILD_DIR=../$BASE_APP_NAME-build
+DOCKER_TAG=foo/$BASE_APP_NAME
+
+if [ -z "$TARGET" ]; then
+  echo 'Missing deployment target. Possible values: staging, production'
+  exit 0
+elif [ -z "$VERSION" ]; then
+  echo 'Missing version number. Ex. 1.0.0'
+  exit 0
+fi
+
+case "$TARGET" in
+  'staging' | 'production')
+    if [ "$TARGET" = 'staging' ]; then
+      APP_NAME=$BASE_APP_NAME-staging
+      SERVER=https://barbaz-staging.com
+      VERSION="$VERSION-staging"
+    elif [ "$TARGET" = 'production' ]; then
+      APP_NAME=$BASE_APP_NAME
+      SERVER=https://barbaz-production.com
+    fi
+    echo "Building & deploying $BASE_APP_NAME:$VERSION"
+    echo ""
+    ;;
+  *)
+    echo 'Invalid deployment target. Possible values: staging, production'
+    exit 0
+    ;;
+esac
+
+rm -rf $BUILD_DIR
+
+echo "Building Meteor bundle to $BUILD_DIR"
+meteor build --architecture=os.linux.x86_64 --server=$SERVER --directory $BUILD_DIR
+
+cp package.json $BUILD_DIR/bundle/
+cp Dockerfile $BUILD_DIR/bundle/
+cp .dockerignore $BUILD_DIR/bundle/
+cd $BUILD_DIR/bundle/
+
+echo "Building Dockerfile..."
+docker build -t ${DOCKER_TAG}:${VERSION} .
+gcloud docker push ${DOCKER_TAG}:${VERSION}
+kubectl rolling-update ${APP_NAME} --update-period=15s --image=${DOCKER_TAG}:${VERSION}
