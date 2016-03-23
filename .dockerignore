@@ -1,0 +1,3 @@
+.docker*
+.meteor/local
+node_modules

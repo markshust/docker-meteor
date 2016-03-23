@@ -6,7 +6,7 @@ Dockerfile for Meteor 1.3+
 This is a simple Dockerfile for running Meteor 1.3+ with Docker. This implements the new NPM integration included in Meteor 1.3, and installs all necessary NPM modules.
 
 ## Usage
-Just place this file into the root of your Meteor installation. You can build the command by running:
+Just place this file into the root of your Meteor installation and the appropriate [.dockerignore](https://github.com/markoshust/docker-meteor/blob/master/.dockerignore) file. Then execute the build command by running:
 
 ```
 docker build -t foo/barbaz:1.0.0 .
