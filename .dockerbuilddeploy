@@ -7,7 +7,7 @@
 TARGET=$1
 VERSION=$2
 BASE_APP_NAME=barbaz
-BUILD_DIR=../$BASE_APP_NAME-build
+BUILD_DIR=./.build
 DOCKER_TAG=foo/$BASE_APP_NAME
 
 if [ -z "$TARGET" ]; then
