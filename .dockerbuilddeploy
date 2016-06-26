@@ -31,9 +31,11 @@ case "$TARGET" in
       APP_NAME=$BASE_APP_NAME-staging
       SERVER=https://staging.barbaz.com
       VERSION="$VERSION-staging"
+      METEOR_SETTINGS=$(cat ./.config/settings-staging.json)
     elif [ "$TARGET" = 'production' ]; then
       APP_NAME=$BASE_APP_NAME
       SERVER=https://barbaz.com
+      METEOR_SETTINGS=$(cat ./.config/settings-production.json)
     fi
     echo "Building & deploying $APP_NAME:$VERSION"
     echo ""
@@ -68,6 +70,7 @@ RUN_COMMAND="docker run \
     -e ROOT_URL=$ROOT_URL \
     -e MONGO_URL=\"${MONGO_URL}\" \
     -e MONGO_OPLOG_URL=\"${MONGO_OPLOG_URL}\" \
+    -e METEOR_SETTINGS='${METEOR_SETTINGS}' \
     --name $BASE_APP_NAME \
     -d $DOCKER_TAG:$VERSION"
 
