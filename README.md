@@ -1,11 +1,19 @@
-# docker-meteor
-Automatically build & deploy Meteor 1.3 apps with Docker (and Kubernetes).
+# markoshust/meteor
+Standard Dockerfile for deploying bundled Meteor apps.
 
 ## Description
-This is a simple Dockerfile for running Meteor 1.3+ with Docker. This implements the new NPM integration included in Meteor 1.3, and installs all necessary NPM modules.
+This is a simple onbuild Dockerfile for running Meteor 1.3+ with Docker.
 
 ## Usage
-Just place this file into the root of your Meteor installation and the appropriate [.dockerignore](https://github.com/markoshust/docker-meteor/blob/master/.dockerignore) file. Then execute the build command by running:
+Just create a new `Dockerfile` in the root of your application:
+
+```
+FROM markoshust/meteor
+```
+
+Then, add an appropriate [.dockerignore](https://github.com/markoshust/docker-meteor/blob/master/.dockerignore) file to the root of your application.
+
+Finally, build your Docker image by running:
 
 ```
 docker build -t foo/barbaz:1.0.0 .
@@ -18,4 +26,4 @@ Place the [.dockerbuilddeploy](https://github.com/markoshust/docker-meteor/blob/
 ./.dockerbuilddeploy staging 1.0.0
 ```
 
-This will build a Docker image for the appropriate environment (staging/production) and the appropriate tag (ex. 1.0.0), push it to Google Cloud, then deploy it to Kubernetes via a rolling-update. This requires Google Container Registry enabled and gcloud cli to be installed, and knowledge of Kubernetes, but can deploy your Meteor app without downtime on an awesome architecture.
+This will build a Docker image for the appropriate environment (staging/production) and the appropriate tag (ex. 1.0.0), push it to a Docker registry, then start a container on your production server with your desired configuration.
