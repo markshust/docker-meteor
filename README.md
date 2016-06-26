@@ -2,6 +2,8 @@
 
 Standard Dockerfile for deploying bundled Meteor apps.
 
+*** Note, this build image is in ALPHA stage and is subject to change. ***
+
 ## Description
 
 This is a simple onbuild Dockerfile for running Meteor 1.3+ with Docker.
