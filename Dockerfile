@@ -1,7 +1,7 @@
 FROM node:0.10.45
 MAINTAINER Mark Shust <mark@shust.com>
 
-ADD . /opt/app
+ONBUILD ADD . /opt/app
 
 WORKDIR /opt/app
 
