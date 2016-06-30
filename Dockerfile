@@ -5,8 +5,7 @@ ONBUILD ADD . /opt/app
 
 WORKDIR /opt/app
 
-RUN mkdir -p programs/server \
-  && cd programs/server \
+ONBUILD cd programs/server \
   && npm init -f \
   && npm i
 
