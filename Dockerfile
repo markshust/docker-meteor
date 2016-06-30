@@ -3,10 +3,9 @@ MAINTAINER Mark Shust <mark@shust.com>
 
 ONBUILD ADD . /opt/app
 
-WORKDIR /programs/server
-
-ONBUILD RUN [ -f package.json ] || npm init -f
-ONBUILD RUN npm i
+ONBUILD RUN cd /programs/server \
+  && ([ -f package.json ] || npm init -f)
+  && npm i
 
 WORKDIR /opt/app
 
