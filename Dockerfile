@@ -3,9 +3,9 @@ MAINTAINER Mark Shust <mark@shust.com>
 
 ONBUILD ADD . /opt/app
 
-ONBUILD RUN cd /programs/server \
-  && npm init -f \
-  && npm i
+WORKDIR /programs/server
+
+ONBUILD RUN npm init -f && npm i
 
 WORKDIR /opt/app
 
