@@ -5,7 +5,8 @@ ONBUILD ADD . /opt/app
 
 WORKDIR /programs/server
 
-ONBUILD RUN npm init -f && npm i
+ONBUILD RUN [ -f package.json ] || npm init -f
+ONBUILD RUN npm i
 
 WORKDIR /opt/app
 
