@@ -5,9 +5,7 @@ ONBUILD ADD . /opt/app
 
 WORKDIR /opt/app
 
-ONBUILD cd programs/server \
-  && npm init -f \
-  && npm i
+ONBUILD (cd programs/server && npm init -f && npm i)
 
 ENV PORT 80
 EXPOSE 80
