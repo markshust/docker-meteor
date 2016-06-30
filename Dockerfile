@@ -3,9 +3,12 @@ MAINTAINER Mark Shust <mark@shust.com>
 
 ONBUILD ADD . /opt/app
 
-WORKDIR /opt/app
+WORKDIR /programs/server
 
-ONBUILD (cd programs/server && npm init -f && npm i)
+ONBUILD npm init -f \
+  && npm i
+
+WORKDIR /opt/app
 
 ENV PORT 80
 EXPOSE 80
