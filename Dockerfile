@@ -1,4 +1,4 @@
-FROM node:4.4.7
+FROM node:0.10.45
 MAINTAINER Mark Shust <mark@shust.com>
 
 ONBUILD ADD . /opt/app
