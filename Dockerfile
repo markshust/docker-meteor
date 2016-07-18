@@ -1,7 +1,7 @@
-FROM node:4.4.7-wheezy
+FROM node:4.4.7
 MAINTAINER Mark Shust <mark@shust.com>
 
-RUN npm update -g
+RUN npm update -g --loglevel=silent
 
 ONBUILD ADD . /opt/app
 
