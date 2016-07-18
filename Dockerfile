@@ -1,5 +1,7 @@
-FROM node:4.4.7
+FROM node:4.4.7-wheezy
 MAINTAINER Mark Shust <mark@shust.com>
+
+RUN npm update -g
 
 ONBUILD ADD . /opt/app
 
