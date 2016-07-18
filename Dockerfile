@@ -7,7 +7,7 @@ ONBUILD ADD . /opt/app
 
 ONBUILD RUN cd /opt/app/programs/server \
   && ([ -f package.json ] || npm init -f) \
-  && npm i
+  && npm i --loglevel=silent --unsafe-perm
 
 WORKDIR /opt/app
 
