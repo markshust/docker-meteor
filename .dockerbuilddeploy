@@ -20,6 +20,7 @@ PRODUCTION_SSH_CONN=production@bar.com
 PRODUCTION_METEOR_SETTINGS=$(cat ./.config/settings-production.json)
 PRODUCTION_MONGO_URL="mongodb://username:password@localhost:27017/bar"
 PRODUCTION_MONGO_OPLOG_URL="mongodb://username:password@localhost:27017/local?authSource=admin"
+PRODUCTION_CLUSTER_DISCOVERY_URL="mongodb://username:password@localhost:27017/bar"
 
 STAGING_APP_NAME=$BASE_APP_NAME-staging
 STAGING_GIT_TAG=$VERSION-staging
@@ -28,6 +29,7 @@ STAGING_SSH_CONN=staging@bar.com
 STAGING_METEOR_SETTINGS=$(cat ./.config/settings-staging.json)
 STAGING_MONGO_URL=$PRODUCTION_MONGO_URL
 STAGING_MONGO_OPLOG_URL=$PRODUCTION_MONGO_OPLOG_URL
+STAGING_CLUSTER_DISCOVERY_URL=$PRODUCTION_CLUSTER_DISCOVERY_URL
 
 if [ -z "$TARGET" ]; then
   echo 'Missing deployment target. Possible values: staging, production'
@@ -46,6 +48,8 @@ case "$TARGET" in
       SSH_CONN=$STAGING_SSH_CONN
       METEOR_SETTINGS=$STAGING_METEOR_SETTINGS
       MONGO_URL=$STAGING_MONGO_URL
+      MONGO_OPLOG_URL=$STAGING_MONGO_OPLOG_URL
+      CLUSTER_DISCOVERY_URL=$STAGING_CLUSTER_DISCOVERY_URL
     elif [ "$TARGET" = 'production' ]; then
       APP_NAME=$PRODUCTION_APP_NAME
       GIT_TAG=$PRODUCTION_GIT_TAG
@@ -53,6 +57,8 @@ case "$TARGET" in
       SSH_CONN=$PRODUCTION_SSH_CONN
       METEOR_SETTINGS=$PRODUCTION_METEOR_SETTINGS
       MONGO_URL=$PRODUCTION_MONGO_URL
+      MONGO_OPLOG_URL=$PRODUCTION_MONGO_OPLOG_URL
+      CLUSTER_DISCOVERY_URL=$PRODUCTION_CLUSTER_DISCOVERY_URL
     fi
     echo "Building & deploying $DOCKER_TAG to $TARGET"
     echo ""
@@ -86,7 +92,8 @@ RUN_COMMAND="docker run \
     -e PORT=$PORT \
     -e ROOT_URL=$ROOT_URL \
     -e MONGO_URL=\"${MONGO_URL}\" \
-    -e MONGO_OPLOG_URL=\"${MONGO_OPLOG_URL}\" \
+    -e MONGO_OPLOG_URL=\"${MONGO_OPLOG_URL}\" \ 
+    -e CLUSTER_DISCOVERY_URL=\"${CLUSTER_DISCOVERY_URL}\" \
     -e METEOR_SETTINGS='${METEOR_SETTINGS}' \
     --name $BASE_APP_NAME \
     -d $DOCKER_TAG"
