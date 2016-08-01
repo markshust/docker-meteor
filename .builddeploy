@@ -1,6 +1,6 @@
 #!/bin/bash
 ## Author: Mark Shust <mark@shust.com>
-## Version: 3.0.0
+## Version: 4.0.0
 ## Repo: https://github.com/markoshust/docker-meteor
 ## Description: Script for bundling, building & deploying a Meteor app with Docker
 
@@ -86,8 +86,10 @@ cd $BUILD_DIR/bundle/
 docker build -t $DOCKER_TAG .
 docker push $DOCKER_TAG
 
-PRERUN_COMMAND="docker stop $BASE_APP_NAME && docker rm $BASE_APP_NAME"
-RUN_COMMAND="docker run \
+RUN_COMMAND="docker pull $DOCKER_TAG \
+  && docker stop $BASE_APP_NAME \
+  && docker rm $BASE_APP_NAME \
+  && docker run \
     -e NODE_ENV=$NODE_ENV \
     -e PORT=$PORT \
     -e ROOT_URL=$ROOT_URL \
@@ -98,5 +100,4 @@ RUN_COMMAND="docker run \
     --name $BASE_APP_NAME \
     -d $DOCKER_TAG"
 
-ssh $SSH_CONN $PRERUN_COMMAND
 ssh $SSH_CONN $RUN_COMMAND
