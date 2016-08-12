@@ -22,10 +22,10 @@ docker build -t foo/bar:1.0.0 .
 
 ## Advanced Usage
 
-Place the [.dockerbuilddeploy](https://github.com/markoshust/docker-meteor/blob/master/.dockerbuilddeploy) in the root of your Meteor directory, update it's contents where appropriate, make it executable, then run the command:
+Place the [.builddeploy](https://github.com/markoshust/docker-meteor/blob/master/.builddeploy) in the root of your Meteor directory, update it's contents where appropriate, make it executable, then run the command:
 
 ```
-./.dockerbuilddeploy production 1.0.0
+./.builddeploy production 1.0.0
 ```
 
 This will build a Docker image for the appropriate environment (staging/production) and the appropriate tag (ex. 1.0.0), push it to a Docker registry, then start a container on your production server with your desired configuration.
