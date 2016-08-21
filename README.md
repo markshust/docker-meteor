@@ -8,10 +8,10 @@ This is a simple onbuild Dockerfile for running Meteor 1.3+ with Docker.
 
 ## Usage
 
-Just create a new `Dockerfile` in the root of your application:
+Just create a new `Dockerfile` in the root of your application, specifying the version of Node you want to use:
 
 ```
-FROM markoshust/meteor
+FROM markoshust/meteor:4.5
 ```
 
 Then, build your Docker image by running:
