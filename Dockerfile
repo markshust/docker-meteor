@@ -1,4 +1,4 @@
-FROM node:4.4
+FROM node:4.5
 MAINTAINER Mark Shust <mark@shust.com>
 
 RUN npm update -g --loglevel=silent
