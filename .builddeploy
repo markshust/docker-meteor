@@ -71,7 +71,7 @@ esac
 
 rm -rf $BUILD_DIR
 
-meteor npm i
+meteor yarn
 
 echo "Building Meteor bundle to $BUILD_DIR"
 meteor build --architecture=os.linux.x86_64 --server=$ROOT_URL --directory $BUILD_DIR
