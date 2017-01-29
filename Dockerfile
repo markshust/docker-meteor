@@ -1,13 +1,11 @@
-FROM node:4.5
+FROM mhart/alpine-node:4.7
 MAINTAINER Mark Shust <mark@shust.com>
 
-RUN npm update -g --loglevel=silent
+RUN apk update && apk add python make g++
+RUN npm i -g yarn@0.19.1
 
 ONBUILD ADD . /opt/app
-
-ONBUILD RUN cd /opt/app/programs/server \
-  && ([ -f package.json ] || npm init -f) \
-  && npm i --loglevel=silent --unsafe-perm
+ONBUILD RUN cd /opt/app/programs/server && yarn
 
 WORKDIR /opt/app
 
