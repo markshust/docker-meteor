@@ -6,12 +6,25 @@ Standard Dockerfile for deploying bundled Meteor apps.
 
 This is a simple onbuild Dockerfile for running Meteor 1.3+ with Docker.
 
+## Versions
+
+The following tags are available, and correspond to the related Node.JS version:
+
+```
+0.10
+4.4
+4.5
+4.6
+4.7
+4.8
+```
+
 ## Usage
 
 Just create a new `Dockerfile` in the root of your application, specifying the version of Node you want to use:
 
 ```
-FROM markoshust/meteor:4.7
+FROM markoshust/meteor:4.8
 ```
 
 Then, build your Docker image by running:
