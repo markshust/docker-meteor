@@ -31,6 +31,20 @@ Then, build your Docker image by running:
 docker build -t foo/bar:1.0.0 .
 ```
 
+## Custom Install Scripts
+
+You can add custom scripts to install on the server after yarn installs by adding an `onbuildinstall` property to your npm scripts in `package.json` as so:
+
+```
+{
+  ...
+  "scripts": {
+    "onbuildinstall": "npm i bcrypt"
+  },
+  ...
+}
+```
+
 ## Advanced Usage
 
 Place the [.builddeploy](https://github.com/markoshust/docker-meteor/blob/master/.builddeploy) in the root of your Meteor directory, update it's contents where appropriate, make it executable, then run the command:
