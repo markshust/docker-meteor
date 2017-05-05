@@ -8,16 +8,14 @@ This is a simple onbuild Dockerfile for running Meteor 1.3+ with Docker.
 
 ## Versions
 
-The following tags are available, and correspond to the related Node.JS version:
+The following tags are available, and correspond to the related Node.JS version supported by Meteor:
 
-```
-0.10
-4.4
-4.5
-4.6
-4.7
-4.8
-```
+- `4.8-1`, `4.8`, `latest`
+- `4.7`
+- `4.6`
+- `4.5`
+- `4.4`
+- `0.10`
 
 ## Usage
 
