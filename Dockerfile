@@ -7,7 +7,7 @@ RUN npm i -g yarn@0.23
 
 ONBUILD ADD . /opt/app
 ONBUILD RUN cd /opt/app/programs/server \
-  && yarn
+  && yarn \
   && npm i bcrypt
 
 WORKDIR /opt/app
