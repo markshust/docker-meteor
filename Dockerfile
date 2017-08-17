@@ -1,11 +1,11 @@
-FROM mhart/alpine-node:4.8
+FROM mhart/alpine-node:8.4
 MAINTAINER Mark Shust <mark@shust.com>
 
 RUN apk update && apk add \
   python \
   make \
   g++
-RUN npm i -g yarn@0.23
+RUN npm i -g yarn@0.27
 
 ONBUILD ADD . /opt/app
 ONBUILD RUN cd /opt/app/programs/server \

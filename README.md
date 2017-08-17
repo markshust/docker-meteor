@@ -10,7 +10,8 @@ This is a simple onbuild Dockerfile for running Meteor 1.3+ with Docker.
 
 The following tags are available, and correspond to the related Node.JS version supported by Meteor:
 
-- `4.8-1`, `4.8`, `latest`
+- `8.4`, `latest`
+- `4.8-1`, `4.8`
 - `4.7`
 - `4.6`
 - `4.5`
@@ -22,7 +23,7 @@ The following tags are available, and correspond to the related Node.JS version 
 Just create a new `Dockerfile` in the root of your application, specifying the version of Node you want to use:
 
 ```
-FROM markoshust/meteor:4.8
+FROM markoshust/meteor:8.4
 ```
 
 Then, build your Docker image by running:
