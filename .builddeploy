@@ -85,7 +85,7 @@ esac
 
 rm -rf $BUILD_DIR
 
-meteor npm install
+meteor yarn
 
 echo "Building Meteor bundle to $BUILD_DIR"
 METEOR_CORDOVA_COMPAT_VERSION_IOS=$METEOR_CORDOVA_COMPAT_VERSION_IOS \
